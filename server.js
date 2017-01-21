@@ -4,7 +4,7 @@ const app = express()
 const server = http.createServer(app)
 const bodyparser = require("body-parser")
 const dotenv = require("dotenv")
-const mongoose = require("mongoose")
+const io = require('socket.io')(server)
 dotenv.config()
 
 /**
@@ -16,8 +16,10 @@ app.use(bodyparser.urlencoded({extended: true}))
 /**
  * Routes
  */
-const apiBaseRoute = require("./routes/api")
+const apiBaseRoute = require("./routes/api");
+const apiFeedsRoute = require('./routes/feeds');
 app.use("/api", apiBaseRoute)
+app.use("/api/feeds", apiFeedsRoute);
 
 /**
  * Error handlers
@@ -45,14 +47,6 @@ app.use(function (err, req, res, next) {
     })
     console.log(err)
 });
-
-/**
- * Mongoose setup
- */
-mongoose.connect(process.env.MONGO_URL, function(err) {
-    if (err) throw err
-})
-mongoose.connection.on("error", console.error.bind(console, 'connection error:'))
 
 server.listen(process.env.PORT, err => {
     if (err) {

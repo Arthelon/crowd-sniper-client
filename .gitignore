@@ -40,3 +40,4 @@ jspm_packages
 data/
 .idea/
 .env
+rethinkdb_data
