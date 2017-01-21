@@ -4,7 +4,7 @@ import FeedList from '../components/dashboard/FeedList';
 import axios from 'axios';
 import { FEED_EVENTS } from '../../../constants';
 import socket from '../io';
-import _findIndex from 'lodash.findindex';
+import * as _ from 'lodash';
 import update from 'immutability-helper';
 
 const replaceAtIndex = (arr, index, data) => update(arr, {
@@ -12,7 +12,7 @@ const replaceAtIndex = (arr, index, data) => update(arr, {
         $set: data
     }
 });
-
+const sortedInsert = (arr, feed) => _.reverse(_.sortBy(_.concat(arr, feed), (feed) => feed.risk))
 
 export default class IndexContainer extends Component {
 
@@ -32,10 +32,10 @@ export default class IndexContainer extends Component {
             const feeds = [];
             const riskFeeds = [];
             data.forEach((feed) => {
-                if (typeof feed.risk === 'undefined' || feed.risk < RISK_THRESHOLD) {
-                    feeds.push(feed);
+                if (feed.active) {
+                    riskFeeds.push(feed);
                 } else {
-                    riskFeeds.push(feed)
+                    feeds.push(feed)
                 }
             });
             this.setState({
@@ -55,9 +55,9 @@ export default class IndexContainer extends Component {
     handleUpdate = (feed) => {
         feed = JSON.parse(feed);
         let field = 'feeds';
-        let index = _findIndex(this.state.feeds, (f) => f.id === feed.id);
+        let index = _.findIndex(this.state.feeds, (f) => f.id === feed.id);
         if (index === -1) {
-            index = _findIndex(this.state.riskFeeds, (f) => f.id === feed.id);
+            index = _.findIndex(this.state.riskFeeds, (f) => f.id === feed.id);
             if (index === -1) {
                 console.log(`Invalid feed ID: ${feed.id}`)
                 return;
@@ -65,35 +65,31 @@ export default class IndexContainer extends Component {
                 field = 'riskFeeds';
             }
         }
-        const oldRiskBool = this.state[field][index].risk >= RISK_THRESHOLD;
-        if (oldRiskBool !== feed.risk >= RISK_THRESHOLD) {
-            const newField = field === 'feeds' ? 'riskFeeds' : 'feeds';
-            this.setState(update(this.state, {
-                [field]: {
-                    $splice: [[index, 1]]
-                },
-                [newField]: {
-                    $push: [feed]
-                }
-            }));
-        } else {
-            this.setState({
-                [field]: replaceAtIndex(this.state[field], index, feed),
-            });
+        const oldActive = this.state[field][index].active;
+        let newField = field;
+        if (oldActive !== feed.active) {
+            newField = field === 'feeds' ? 'riskFeeds' : 'feeds';
         }
+        this.setState(update(this.state, {
+            [field]: {
+                $splice: [[index, 1]]
+            },
+            [newField]: {
+                $set: sortedInsert(this.state[newField], feed)
+            }
+        }));
     };
 
     handleInsert = (feed) => {
         feed = JSON.parse(feed);
         let field = 'feeds';
-        if (feed.risk >= RISK_THRESHOLD) {
+        if (!feed.active) {
             field = 'riskFeeds';
         }
-        this.setState(update(this.state, {
-           [field]: {
-               $push: [feed]
-           }
-        }));
+
+        this.setState({
+            [field]: sortedInsert(this.state[field], feed)
+        })
     };
 
     render() {

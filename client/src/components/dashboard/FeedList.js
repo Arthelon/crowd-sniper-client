@@ -56,7 +56,7 @@ class FeedList extends React.Component {
                         }}
                     >
                         {risk ?
-                            <h2>Risk Feeds</h2> :
+                            <h2>Active Feeds</h2> :
                             <h2>Feeds</h2>
                         }
                     </div>
