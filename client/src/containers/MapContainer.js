@@ -12,7 +12,8 @@ const sortedInsert = (arr, feed) => _.reverse(_.sortBy(_.concat(arr, feed), (fee
 export default class MapContainer extends Component {
 
     state = {
-        feeds: []
+        feeds: [],
+        riskFeeds: []
     }
 
     componentDidMount() {
@@ -97,7 +98,7 @@ export default class MapContainer extends Component {
                 style={{ margin: '2em 3em' }}
             >
                 <Map
-                    feeds={this.state.feeds}
+                    feeds={this.state.riskFeeds}
                 />
             </div>
         )

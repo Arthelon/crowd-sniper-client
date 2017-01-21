@@ -8,15 +8,15 @@ const getFillColor = (risk) => {
     } else if (risk >= 0.4) {
         return 'orange'
     }
-    return null;
+    return 'green';
 };
 
 const getRadius = (population) => {
-    const radius = (population || 500) / 10;
+    const radius = (population || 500) / 100;
     if (radius > 1000) {
-        return 1000;
+        return 500;
     } else if (radius < 100) {
-        return 100;
+        return 80;
     }
     return radius;
 }
@@ -28,13 +28,14 @@ class OverMap extends React.Component {
 
         return (
             <Map
-                style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}
-                center={[0, 0]}
-                zoom={13}
+                style={{ position: 'absolute', top: 50, bottom: 0, left: 0, right: 0}}
+                center={[22.2764425,114.1736903]}
+                zoom={17}
             >
                 <TileLayer
                     url="http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    maxZoom={19}
+                    maxZoom={18}
+                    minZoom={5}
                 />
                 {feeds.map((feed) => {
                     const coords = feed.coordinates.coordinates;
