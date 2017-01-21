@@ -5,12 +5,13 @@ import FeedItem from './FeedItem';
 class FeedList extends React.Component {
 
     renderFeeds() {
-        const { risk, feeds } = this.props;
+        const { feeds } = this.props;
 
         return (
             <div>
                 {feeds.map((feed) =>
                     <FeedItem
+                        key={feed.id}
                         {...feed}
                     />
                 )}
@@ -35,7 +36,7 @@ class FeedList extends React.Component {
     }
 
     render() {
-        const { risk } = this.props;
+        const { risk, feeds } = this.props;
 
         return (
             <div style={{
@@ -61,7 +62,7 @@ class FeedList extends React.Component {
                     </div>
                     <h4 style={{ position: 'absolute', right: '1.5em', bottom: 0}}>Risk</h4>
                 </div>
-                {risk ?
+                {!feeds.length ?
                     this.renderEmpty()
                     :
                     this.renderFeeds()

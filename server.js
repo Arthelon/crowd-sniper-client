@@ -6,7 +6,9 @@ const bodyparser = require("body-parser")
 const dotenv = require("dotenv")
 const cors = require('cors');
 const io = require('socket.io')(server)
+const liveUpdates = require('./db/models').liveUpdates;
 dotenv.config()
+liveUpdates(io);
 
 /**
  * Middleware
