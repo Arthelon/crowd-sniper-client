@@ -1,8 +1,8 @@
 import React from 'react';
-import { Tag, Intent } from '@blueprintjs/core';
+import { Tag } from '@blueprintjs/core';
 import { FEED_TYPES } from '../../../../constants';
 
-const roundTwo = (num) => Math.round(num * 100) / 100
+const roundTwo = (num) => Math.round(num * 100) / 100;
 
 class FeedItem extends React.Component {
 

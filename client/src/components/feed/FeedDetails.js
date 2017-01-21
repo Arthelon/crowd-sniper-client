@@ -7,14 +7,22 @@ class FeedDetails extends React.Component {
 
     render() {
         const {name, coordinates} = this.props;
-        const coords = coordinates.coordinates;
+        console.log(this.props)
+        const coords = coordinates ? coordinates.coordinates : [];
 
         return (
-            <div className="pt-card">
+            <div
+                style={{
+                    minHeight: '400px'
+                }}
+                className="pt-card"
+            >
                 <h3>{name}</h3>
                 <Gmaps
                     lat={coords[0]}
                     lng={coords[1]}
+                    height="400px"
+                    width="600px"
                     params={{key: GMAP_API_KEY}}
                 />
             </div>

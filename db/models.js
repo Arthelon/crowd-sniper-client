@@ -6,13 +6,20 @@ const type = thinky.type;
 // Create a model - the table is automatically created
 const Feed = thinky.createModel("Feed", {
     id: type.string(),
-    name: type.string(),
-    type: type.string().enum(FEED_TYPES),
+    name: type.string().required(),
+    type: type.string().enum(FEED_TYPES).default('OTHER'),
     population: type.number().min(0).max(1),
     coordinates: "Point",
-    risk: type.number().min(0).max(1),
-    videos: [type.string()]
+    risk: type.number().min(0).max(1).default(0),
+    videos: [type.string()],
+    active: type.boolean().default(false),
+    tsId: type.string()
 });
+const TS = thinky.createModel("TSData", {
+    id: type.string(),
+    data: [type.number().min(0).max(1)]
+});
+TS.belongsTo(Feed, 'ts', 'tsId', 'id')
 
 const liveUpdates = (io) => {
     Feed.changes().then((feeds) => {

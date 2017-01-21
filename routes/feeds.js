@@ -2,9 +2,10 @@ const router = require('express').Router();
 const jsonResponse = require('../utils/api').jsonReponse;
 const Feed = require('../db/models').Feed;
 const Errors = require('../db').Errors;
+const r = require('../db').r;
 
 router.get('/', (req, res, next) => {
-    Feed.run().then((feeds) => {
+    Feed.orderBy({ index: r.desc('id')}).run().then((feeds) => {
         jsonResponse(res, true, feeds, 'Successfully retrieved feeds');
     })
         .catch(next)

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { API_URL } from '../constants';
-
+import FeedDetails from '../components/feed/FeedDetails';
 
 class FeedContainer extends React.Component {
 
@@ -28,10 +28,19 @@ class FeedContainer extends React.Component {
     }
 
     render() {
+        const { feed } = this.state;
+
         return (
             <div
-                style={{ display: 'flex', flexDirection: 'row' }}
+                style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    margin: '2em 3em'
+                }}
             >
+                <FeedDetails
+                    {...feed}
+                />
             </div>
         );
     }
