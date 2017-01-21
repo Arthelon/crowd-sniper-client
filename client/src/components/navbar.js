@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../logo.png';
 
 class Navbar extends React.Component {
 
@@ -9,8 +10,20 @@ class Navbar extends React.Component {
     render() {
         return (
           <nav className="pt-navbar" style={{ zIndex: 1000}}>
-              <div className="pt-navbar-group pt-align-left">
-                  <div className="pt-navbar-heading">CrowdSniper</div>
+              <div
+                  style={{ cursor: 'pointer' }}
+                  onClick={this.handleNavbarClick('/')}
+                  className="pt-navbar-group pt-align-left">
+                      <img
+                          style={{ height: '60%' }}
+                          src={logo}
+                      />
+                      <div
+                          style={{ marginLeft: '0.5em' }}
+                          className="pt-navbar-heading"
+                      >
+                          CrowdSniper
+                      </div>
               </div>
               <div className="pt-navbar-group pt-align-right">
                   <button
