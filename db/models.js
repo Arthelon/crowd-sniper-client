@@ -8,10 +8,10 @@ const Feed = thinky.createModel("Feed", {
     id: type.string(),
     name: type.string().required(),
     type: type.string().enum(FEED_TYPES).default('OTHER'),
-    population: type.number().min(0).max(1),
+    population: type.number(),
     coordinates: "Point",
     risk: type.number().min(0).max(1).default(0),
-    videos: [type.string()],
+    video: type.string(),
     active: type.boolean().default(false),
     tsId: type.string()
 });
