@@ -8,7 +8,7 @@ Router.get('/:id', (req, res, next) => {
         .then((feed) => {
             jsonResponse(res, true, feed.ts || [], 'Successfully retrieved ts');
         })
-        .catch(Errors.DocumentNotFound, (err) => {
+        .catch(Errors.DocumentNotFound, () => {
            jsonResponse(res, false, [], 'TS not found', 404);
         })
         .catch(next);

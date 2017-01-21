@@ -8,6 +8,10 @@ class FeedMap extends React.Component {
         const { lat, lng } = this.props;
         return (
             <GoogleMap
+                style={{
+                    top: 0,
+                    bottom: 0
+                }}
                 defaultZoom={13}
                 defaultCenter={{ lat, lng }}
             >

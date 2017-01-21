@@ -48,7 +48,7 @@ class FeedItem extends React.Component {
                         <b
                             style={{ marginLeft: '1em' }}
                         >
-                            {risk ? risk : 'Unknown'}
+                            {risk ? roundTwo(risk) : 'Unknown'}
                             </b>
                     </div>
                 </div>
