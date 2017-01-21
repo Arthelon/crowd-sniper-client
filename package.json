@@ -1,0 +1,24 @@
+{
+  "name": "react-express-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nf start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel <hsing.daniel@gmail.com> (http://arthelon.github.io)",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "foreman": "^2.0.0",
+    "mongoose": "^4.6.7",
+    "nodemon": "^1.11.0",
+    "socket.io": "^1.7.2"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.33.0"
+  }
+}
