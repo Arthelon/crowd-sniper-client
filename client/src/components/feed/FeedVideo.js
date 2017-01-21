@@ -15,6 +15,7 @@ class FeedVideo extends React.Component {
                 playing
                 loop
                 url={url}
+                style={{marginTop: '2em'}}
                 onEnded={this.handleEnded}
             />
         )

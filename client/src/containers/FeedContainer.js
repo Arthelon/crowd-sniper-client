@@ -56,14 +56,20 @@ class FeedContainer extends React.Component {
                     {...feed}
                 />
                 <div
-                    style={{ width: '65%', padding: '1em 3em'}}
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '65%',
+                        padding: '1em 3em'
+                    }}
                 >
                     <RiskSlider
                         risk={feed.risk}
                     />
-                    {/*<FeedVideo*/}
-                        {/*url="https://imaginehackdiag666.blob.core.windows.net/movies/British_Football_Hooligans_Mix_3__MorningGlory1997__kW23lUV6oFk.avi"*/}
-                    {/*/>*/}
+                    <FeedVideo
+                        url="https://imaginehackdiag666.blob.core.windows.net/movies/crowd_violence_Occupy_Cal_video_Police_brutally_be.webm"
+                    />
                 </div>
             </div>
         );

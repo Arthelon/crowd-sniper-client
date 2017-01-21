@@ -8,7 +8,7 @@ class Navbar extends React.Component {
 
     render() {
         return (
-          <nav className="pt-navbar">
+          <nav className="pt-navbar" style={{ zIndex: 1000}}>
               <div className="pt-navbar-group pt-align-left">
                   <div className="pt-navbar-heading">CrowdSniper</div>
               </div>

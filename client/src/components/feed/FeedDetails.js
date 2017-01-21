@@ -30,7 +30,7 @@ class FeedDetails extends React.Component {
                 </h3>
                 <ul>
                     <li><span className="pt-icon-people"/> <b>Scale: </b>{population}</li>
-                    {!!coords.length && <li><span className="pt-icon-map"/> <b>Location: </b> {coords[0]}, {coords[1]}</li>}
+                    {!!coords.length && <li><span className="pt-icon-map"/> <b>Location: </b> {coords[1]}, {coords[0]}</li>}
                 </ul>
                 <FeedMap
                     containerElement={
@@ -39,8 +39,8 @@ class FeedDetails extends React.Component {
                                     mapElement={
                       <div style={{ height: `100%` }} />
                     }
-                    lat={coords[0]}
-                    lng={coords[1]}
+                    lat={coords[1]}
+                    lng={coords[0]}
                     googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${GMAP_API_KEY}`}
                     loadingElement={<Spinner/>}
                 />

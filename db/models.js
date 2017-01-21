@@ -15,7 +15,7 @@ const Feed = thinky.createModel("Feed", {
     active: type.boolean().default(false),
     tsId: type.string()
 });
-const TS = thinky.createModel("TSData", {
+const TS = thinky.createModel("TS", {
     id: type.string(),
     data: [type.number().min(0).max(1)]
 });

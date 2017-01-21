@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tag } from '@blueprintjs/core';
+import { RISK_THRESHOLD } from '../../constants';
 import { FEED_TYPES } from '../../../../constants';
 
 const roundTwo = (num) => Math.round(num * 100) / 100;
@@ -15,7 +16,11 @@ class FeedItem extends React.Component {
         const coords = coordinates && coordinates.coordinates;
 
         return (
-            <div className="pt-card">
+            <div
+                style={{backgroundColor: risk >= RISK_THRESHOLD ? 'red' : ''}}
+                className="pt-card"
+
+            >
                 <div
                     style={{
                         position: 'relative',

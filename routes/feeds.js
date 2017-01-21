@@ -5,7 +5,7 @@ const Errors = require('../db').Errors;
 const r = require('../db').r;
 
 router.get('/', (req, res, next) => {
-    Feed.orderBy({ index: r.desc('id')}).run().then((feeds) => {
+    Feed.orderBy({ index: r.desc('risk')}).run().then((feeds) => {
         jsonResponse(res, true, feeds, 'Successfully retrieved feeds');
     })
         .catch(next)
