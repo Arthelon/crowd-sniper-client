@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { API_URL, RISK_THRESHOLD } from '../constants';
+import { API_URL } from '../constants';
 import FeedList from '../components/dashboard/FeedList';
 import axios from 'axios';
 import { FEED_EVENTS } from '../../../constants';
@@ -7,11 +7,6 @@ import socket from '../io';
 import * as _ from 'lodash';
 import update from 'immutability-helper';
 
-const replaceAtIndex = (arr, index, data) => update(arr, {
-    [index]: {
-        $set: data
-    }
-});
 const sortedInsert = (arr, feed) => _.reverse(_.sortBy(_.concat(arr, feed), (feed) => feed.risk))
 
 export default class IndexContainer extends Component {
@@ -46,6 +41,12 @@ export default class IndexContainer extends Component {
         .catch((err) => {
             console.log(err);
         })
+    }
+
+    componentWillUnmount() {
+        socket.removeListener(FEED_EVENTS.update);
+        socket.removeListener(FEED_EVENTS.delete);
+        socket.removeListener(FEED_EVENTS.insert);
     }
 
     handleDelete = (feed) => {

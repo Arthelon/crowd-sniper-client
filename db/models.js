@@ -35,6 +35,7 @@ const liveUpdates = (io) => {
                    io.emit(FEED_EVENTS.insert, data);
                }
                else {
+                   console.log(data);
                    io.emit(FEED_EVENTS.update, data);
                }
            }
