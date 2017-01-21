@@ -60,7 +60,7 @@ class FeedList extends React.Component {
                             <h2>Feeds</h2>
                         }
                     </div>
-                    <h4 style={{ position: 'absolute', right: '1.5em', bottom: 0}}>Risk</h4>
+                    {feeds.length && <h4 style={{ position: 'absolute', right: '1.5em', bottom: 0}}>Risk</h4>}
                 </div>
                 {!feeds.length ?
                     this.renderEmpty()

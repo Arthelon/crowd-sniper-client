@@ -22,8 +22,10 @@ app.use(bodyparser.urlencoded({extended: true}))
  */
 const apiBaseRoute = require("./routes/api");
 const apiFeedsRoute = require('./routes/feeds');
+const apiTSRoute = require('./routes/ts');
 app.use("/api", apiBaseRoute)
 app.use("/api/feeds", apiFeedsRoute);
+app.use("/api/feeds/ts", apiTSRoute);
 
 /**
  * Error handlers

@@ -7,4 +7,4 @@ const jsonResponse = (resp, success, data, message, status = 200) => {
     })
 };
 
-exports.jsonReponse = jsonResponse;
+exports.jsonResponse = jsonResponse;

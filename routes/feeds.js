@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const jsonResponse = require('../utils/api').jsonReponse;
+const jsonResponse = require('../utils/api').jsonResponse;
 const Feed = require('../db/models').Feed;
 const Errors = require('../db').Errors;
 const r = require('../db').r;
