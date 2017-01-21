@@ -32,18 +32,20 @@ class FeedDetails extends React.Component {
                     <li><span className="pt-icon-people"/> <b>Scale: </b>{population}</li>
                     {!!coords.length && <li><span className="pt-icon-map"/> <b>Location: </b> {coords[1]}, {coords[0]}</li>}
                 </ul>
-                <FeedMap
-                    containerElement={
-                      <div style={{ height: `83%` }} />
-                    }
-                                    mapElement={
-                      <div style={{ height: `100%` }} />
-                    }
-                    lat={coords[1]}
-                    lng={coords[0]}
-                    googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${GMAP_API_KEY}`}
-                    loadingElement={<Spinner/>}
-                />
+                {coords.length === 2 &&
+                    <FeedMap
+                        containerElement={
+                          <div style={{ height: `83%` }} />
+                        }
+                        mapElement={
+                          <div style={{ height: `100%` }} />
+                        }
+                        lat={coords[1]}
+                        lng={coords[0]}
+                        googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&key=${GMAP_API_KEY}`}
+                        loadingElement={<Spinner/>}
+                    />
+                }
             </div>
         );
     }

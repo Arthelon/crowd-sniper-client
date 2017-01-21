@@ -68,7 +68,7 @@ class FeedContainer extends React.Component {
                         risk={feed.risk}
                     />
                     <FeedVideo
-                        url="https://imaginehackdiag666.blob.core.windows.net/movies/crowd_violence_Occupy_Cal_video_Police_brutally_be.webm"
+                        url={feed.video}
                     />
                 </div>
             </div>

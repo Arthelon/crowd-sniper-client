@@ -1,5 +1,5 @@
 import React from 'react';
-import { withGoogleMap, GoogleMap } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import withScriptjs from "react-google-maps/lib/async/withScriptjs";
 
 class FeedMap extends React.Component {
@@ -12,10 +12,12 @@ class FeedMap extends React.Component {
                     top: 0,
                     bottom: 0
                 }}
-                defaultZoom={13}
+                defaultZoom={15}
                 defaultCenter={{ lat, lng }}
             >
-
+                <Marker
+                    position={{ lat, lng }}
+                />
             </GoogleMap>
         )
     }
@@ -23,10 +25,6 @@ class FeedMap extends React.Component {
 FeedMap.propTypes = {
     lat: React.PropTypes.number,
     lng: React.PropTypes.number,
-}
-FeedMap.defaultProps = {
-    lat: 0,
-    lng: 0,
 };
 
 export default withScriptjs(withGoogleMap(FeedMap));

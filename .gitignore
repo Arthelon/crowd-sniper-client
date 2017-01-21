@@ -41,3 +41,4 @@ data/
 .idea/
 .env
 rethinkdb_data
+yolo.js
