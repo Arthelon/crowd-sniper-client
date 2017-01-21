@@ -11,7 +11,7 @@ export default function getRoutes() {
         <Route path="/" component={App}>
             <IndexRoute component={IndexContainer}/>
             <Route path="/map" component={MapContainer}/>
-            <Route path="/feed/:id" component={FeedContainer}/>
+            <Route path="/feeds/:id" component={FeedContainer}/>
         </Route>
     )
 }
