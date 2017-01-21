@@ -5,7 +5,7 @@ const jsonResponse = require('../utils/api').jsonResponse;
 
 const store = {};
 
-Router.get('/:id', (req, res, next) => {
+Router.put('/:id', (req, res, next) => {
     const id = req.params.id;
     Feed.get(id).getJoin({ ts: true }).run()
         .then((feed) => {
@@ -18,13 +18,27 @@ Router.get('/:id', (req, res, next) => {
             if (counts[id] >= length - 1) {
                 counts[id] = 0;
             }
-            jsonResponse(res, true, feed.ts.data[counts[id]], 'Successfully retrieved ts');
-
+            const risk = feed.ts.data[counts[id]];
+            return feed.merge({ risk }).save();
+        })
+        .then(() => {
+            jsonResponse(res, true, null, 'Successfully updated ts');
         })
         .catch(Errors.DocumentNotFound, () => {
            jsonResponse(res, false, [], 'TS not found', 404);
         })
         .catch(next);
 });
+
+Router.get('/:id', (req, res, next) => {
+    Feed.get(req.params.id).getJoin({ ts: true }).run()
+        .then((feed) => {
+            jsonResponse(res, true, feed.ts.data, 'Succesfully retrieved ts data')
+        })
+        .catch(Errors.DocumentNotFound, () => {
+            jsonResponse(res, false, [], 'TS not found', 404);
+        })
+        .catch(next)
+})
 
 module.exports = Router;

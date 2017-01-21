@@ -6,12 +6,8 @@ import axios from 'axios';
 class FeedVideo extends React.Component {
 
     handleProgress = () => {
-        const { updateRisk, id } = this.props;
-        axios.get(`${API_URL}/feeds/ts/${id}`)
-            .then((resp) => {
-                const { data } = resp.data;
-                updateRisk(data);
-            })
+        const { id } = this.props;
+        axios.put(`${API_URL}/feeds/ts/${id}`, {})
             .catch((err) => {
                 console.log(err);
             })

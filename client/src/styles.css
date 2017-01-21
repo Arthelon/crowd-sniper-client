@@ -1,1 +1,5 @@
 @import "~@blueprintjs/core";
+
+.pt-toast {
+    z-index: 9999;
+}
