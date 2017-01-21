@@ -11,7 +11,15 @@ class FeedVideo extends React.Component {
             .catch((err) => {
                 console.log(err);
             })
-    }
+    };
+
+    handleStart = () => {
+        const {id} = this.props;
+        axios.put(`${API_URL}/feeds/ts/${id}?new=true`, {})
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     render() {
         const { url } = this.props;
@@ -22,6 +30,7 @@ class FeedVideo extends React.Component {
                 loop
                 url={url}
                 style={{marginTop: '2em'}}
+                onStart={this.handleStart}
                 onProgress={this.handleProgress}
             />
         )
