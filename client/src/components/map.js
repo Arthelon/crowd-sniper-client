@@ -29,7 +29,7 @@ class OverMap extends React.Component {
         return (
             <Map
                 style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0}}
-                center={[22.2806888,114.2041924]}
+                center={[0, 0]}
                 zoom={13}
             >
                 <TileLayer

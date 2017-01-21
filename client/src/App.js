@@ -4,6 +4,7 @@ import { FEED_EVENTS } from '../../constants';
 import { RISK_THRESHOLD } from './constants';
 import { Toaster, Position, Intent } from '@blueprintjs/core'
 import io from './io';
+import './styles.css'
 
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
     handleUpdate = (feed) => {
         feed = JSON.parse(feed);
         if (feed.risk >= RISK_THRESHOLD) {
+            console.log('evil')
             const toast = Toaster.create({
                 position: Position.TOP,
             });
