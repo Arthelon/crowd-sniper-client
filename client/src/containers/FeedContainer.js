@@ -4,6 +4,7 @@ import { API_URL } from '../constants';
 import { FEED_EVENTS } from '../../../constants';
 import FeedDetails from '../components/feed/FeedDetails';
 import RiskSlider from '../components/feed/RiskSlider';
+import RiskGraph from '../components/feed/RiskGraph';
 import FeedVideo from '../components/feed/FeedVideo';
 import io from '../io';
 import * as _ from 'lodash';
@@ -68,6 +69,9 @@ class FeedContainer extends React.Component {
                         }}
                     >
                         <RiskSlider
+                            risk={feed.risk}
+                        />
+                        <RiskGraph
                             risk={feed.risk}
                         />
                         <FeedVideo

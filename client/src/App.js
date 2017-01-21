@@ -16,7 +16,6 @@ class App extends Component {
     handleUpdate = (feed) => {
         feed = JSON.parse(feed);
         if (feed.risk >= RISK_THRESHOLD) {
-            console.log('evil')
             const toast = Toaster.create({
                 position: Position.TOP,
             });
