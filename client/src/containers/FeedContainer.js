@@ -6,6 +6,7 @@ import FeedDetails from '../components/feed/FeedDetails';
 import RiskSlider from '../components/feed/RiskSlider';
 import FeedVideo from '../components/feed/FeedVideo';
 import io from '../io';
+import * as _ from 'lodash';
 
 class FeedContainer extends React.Component {
 
@@ -45,32 +46,42 @@ class FeedContainer extends React.Component {
         const { feed } = this.state;
 
         return (
-            <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    padding: '2em 3em'
-                }}
-            >
-                <FeedDetails
-                    {...feed}
-                />
+            <div>
+                {feed &&
                 <div
                     style={{
                         display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        width: '65%',
-                        padding: '1em 3em'
+                        flexDirection: 'row',
+                        padding: '2em 3em'
                     }}
                 >
-                    <RiskSlider
-                        risk={feed.risk}
+                    <FeedDetails
+                        {...feed}
                     />
-                    <FeedVideo
-                        url={feed.video}
-                    />
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            width: '65%',
+                            padding: '1em 3em'
+                        }}
+                    >
+                        <RiskSlider
+                            risk={feed.risk}
+                        />
+                        <FeedVideo
+                            id={feed.id}
+                            updateRisk={(risk) => {
+                                this.setState({
+                                    feed: _.merge(this.state.feed, { risk })
+                                })
+                            }}
+                            url={feed.video}
+                        />
+                    </div>
                 </div>
+                }
             </div>
         );
     }

@@ -6,6 +6,7 @@ const bodyparser = require("body-parser")
 const dotenv = require("dotenv")
 const cors = require('cors');
 const io = require('socket.io')(server)
+const session = require('express-session');
 const liveUpdates = require('./db/models').liveUpdates;
 dotenv.config()
 liveUpdates(io);
@@ -16,6 +17,12 @@ liveUpdates(io);
 app.use(cors());
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({extended: true}))
+app.use(session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: true }
+}))
 
 /**
  * Routes

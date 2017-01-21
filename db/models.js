@@ -19,7 +19,9 @@ const TS = thinky.createModel("TS", {
     id: type.string(),
     data: [type.number().min(0).max(1)]
 });
-TS.belongsTo(Feed, 'ts', 'tsId', 'id')
+
+Feed.hasOne(TS, 'ts', 'tsId', 'id')
+TS.belongsTo(Feed, 'ts', 'id', 'tsId')
 
 const liveUpdates = (io) => {
     Feed.changes().then((feeds) => {
