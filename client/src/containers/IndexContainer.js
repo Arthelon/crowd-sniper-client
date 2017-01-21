@@ -6,6 +6,7 @@ import { FEED_EVENTS } from '../../../constants';
 import socket from '../io';
 import * as _ from 'lodash';
 import update from 'immutability-helper';
+import { Spinner } from '@blueprintjs/core';
 
 const sortedInsert = (arr, feed) => _.reverse(_.sortBy(_.concat(arr, feed), (feed) => feed.risk))
 
@@ -35,11 +36,15 @@ export default class IndexContainer extends Component {
             });
             this.setState({
                 feeds,
-                riskFeeds
+                riskFeeds,
+                isLoading: false,
             });
         })
         .catch((err) => {
             console.log(err);
+            this.setState({
+                isLoading: false,
+            })
         })
     }
 
@@ -94,23 +99,30 @@ export default class IndexContainer extends Component {
     };
 
     render() {
-        const { feeds, riskFeeds } = this.state;
+        const { feeds, riskFeeds, isLoading } = this.state;
 
         return (
             <div
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center'
-                }}
+                style={{ textAlign: 'center' }}
             >
-                <FeedList
-                  feeds={feeds}
-                />
-                <FeedList
-                    risk
-                    feeds={riskFeeds}
-                />
+                {isLoading ?
+                    <Spinner className="pt-large" style={{ top: '2em' }} /> :
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <FeedList
+                            feeds={feeds}
+                        />
+                        <FeedList
+                            risk
+                            feeds={riskFeeds}
+                        />
+                    </div>
+                }
             </div>
         )
     }

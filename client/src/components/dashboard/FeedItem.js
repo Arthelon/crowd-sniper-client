@@ -2,6 +2,7 @@ import React from 'react';
 import { Tag } from '@blueprintjs/core';
 import { RISK_THRESHOLD } from '../../constants';
 import { FEED_TYPES } from '../../../../constants';
+import { getIntentFromRisk, toPercent } from '../../utils';
 
 const roundTwo = (num) => Math.round(num * 100) / 100;
 
@@ -38,7 +39,7 @@ class FeedItem extends React.Component {
                     >
                         {type}
                     </Tag>
-                    <div style={{ right: 0, position: 'absolute', display: 'flex', flexDirection: 'row'}}>
+                    <div style={{ right: 0, position: 'absolute', display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                         {coords &&
                             <div
                                 style={{
@@ -50,11 +51,15 @@ class FeedItem extends React.Component {
                                 <p style={{ marginLeft: '0.3em' }}>{`${roundTwo(coords[0])},${roundTwo(coords[1])}`}</p>
                             </div>
                         }
-                        <b
-                            style={{ marginLeft: '1em' }}
+                        <Tag
+                            style={{ marginLeft: '1em', marginBottom: '0.5em' }}
+                            intent={getIntentFromRisk(risk)}
+                            className="pt-large"
                         >
-                            {risk ? roundTwo(risk) : 'Unknown'}
+                            <b>
+                                {risk ? toPercent(risk) : 'Unknown'}
                             </b>
+                        </Tag>
                     </div>
                 </div>
             </div>

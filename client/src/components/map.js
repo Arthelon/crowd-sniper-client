@@ -19,16 +19,17 @@ const getRadius = (population) => {
         return 80;
     }
     return radius;
-}
+};
 
 class OverMap extends React.Component {
 
     render() {
         const { feeds } = this.props;
+        console.log(feeds);
 
         return (
             <Map
-                style={{ position: 'absolute', top: 50, bottom: 0, left: 0, right: 0}}
+                style={{ position: 'absolute', top: 50, bottom: 0, left: 0, right: 0, zIndex: 1}}
                 center={[22.2764425,114.1736903]}
                 zoom={17}
             >
