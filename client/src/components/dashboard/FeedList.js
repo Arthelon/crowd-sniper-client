@@ -9,9 +9,9 @@ class FeedList extends React.Component {
 
         return (
             <div>
-                {feeds.map((feed) =>
+                {feeds.map((feed, idx) =>
                     <FeedItem
-                        key={feed.id}
+                        key={`${idx}${feed.id}`}
                         {...feed}
                     />
                 )}

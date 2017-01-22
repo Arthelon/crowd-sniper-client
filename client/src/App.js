@@ -15,15 +15,15 @@ class App extends Component {
 
     handleUpdate = (feed) => {
         feed = JSON.parse(feed);
-        if (feed.risk >= RISK_THRESHOLD) {
-            const toast = Toaster.create({
-                position: Position.TOP,
-            });
-            toast.show({
-                message: `Warning, high probability of violence in ${feed.name}`,
-                intent: Intent.DANGER
-            })
-        }
+        // if (feed.risk >= RISK_THRESHOLD) {
+        //     const toast = Toaster.create({
+        //         position: Position.TOP,
+        //     });
+        //     toast.show({
+        //         message: `Warning, high probability of violence in ${feed.name}`,
+        //         intent: Intent.DANGER
+        //     })
+        // }
     };
 
     render() {

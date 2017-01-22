@@ -8,7 +8,13 @@ import * as _ from 'lodash';
 import update from 'immutability-helper';
 import { Spinner } from '@blueprintjs/core';
 
-const sortedInsert = (arr, feed) => _.reverse(_.sortBy(_.concat(arr, feed), (feed) => feed.risk))
+const sortedInsert = (arr, feed) => _.reverse(_.sortBy(_.concat(arr, feed), (feed) => feed.risk));
+
+const sortedInsertAndSplice = (arr, feed) => {
+    const newArr = arr.filter((f) => f.id !== feed.id);
+    return sortedInsert(newArr, feed)
+};
+
 
 export default class IndexContainer extends Component {
 
@@ -25,6 +31,16 @@ export default class IndexContainer extends Component {
         axios.get(`${API_URL}/feeds`)
         .then((resp) => {
             const { data } = resp.data;
+            data.forEach((feed) =>  {
+                axios.put(`${API_URL}/feeds/ts/${feed.id}?new=true`, {})
+                    .catch(console.log)
+            })
+            this.interval = setInterval(() => {
+                data.forEach((feed) =>  {
+                    axios.put(`${API_URL}/feeds/ts/${feed.id}`, {})
+                        .catch(console.log)
+                })
+            }, 1000);
             const feeds = [];
             const riskFeeds = [];
             data.forEach((feed) => {
@@ -39,6 +55,7 @@ export default class IndexContainer extends Component {
                 riskFeeds,
                 isLoading: false,
             });
+
         })
         .catch((err) => {
             console.log(err);
@@ -52,6 +69,7 @@ export default class IndexContainer extends Component {
         socket.removeListener(FEED_EVENTS.update);
         socket.removeListener(FEED_EVENTS.delete);
         socket.removeListener(FEED_EVENTS.insert);
+        clearInterval(this.interval);
     }
 
     handleDelete = (feed) => {
@@ -76,14 +94,21 @@ export default class IndexContainer extends Component {
         if (oldActive !== feed.active) {
             newField = field === 'feeds' ? 'riskFeeds' : 'feeds';
         }
-        this.setState(update(this.state, {
-            [field]: {
-                $splice: [[index, 1]]
-            },
-            [newField]: {
-                $set: sortedInsert(this.state[newField], feed)
-            }
-        }));
+        if (newField !== field) {
+            this.setState(update(this.state, {
+                [field]: {
+                    $splice: [[index, 1]]
+                },
+                [newField]: {
+                    $set: sortedInsert(this.state[newField], feed)
+                }
+            }));
+        } else {
+            console.log(sortedInsertAndSplice(this.state[field], feed));
+            this.setState({
+                [field]: sortedInsertAndSplice(this.state[field], feed)
+            });
+        }
     };
 
     handleInsert = (feed) => {

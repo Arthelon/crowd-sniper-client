@@ -18,7 +18,6 @@ class FeedItem extends React.Component {
 
         return (
             <div
-                style={{backgroundColor: risk >= RISK_THRESHOLD ? 'red' : ''}}
                 className="pt-card"
 
             >
