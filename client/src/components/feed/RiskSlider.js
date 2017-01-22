@@ -1,19 +1,19 @@
 import React from 'react';
-import { Slider } from '@blueprintjs/core';
+import { ProgressBar, Intent } from '@blueprintjs/core';
 
 class RiskSlider extends React.Component {
 
     render() {
         const {risk} = this.props;
+        let intent
+        if (risk > 0.7) intent = Intent.DANGER
+        else if (risk > 0.4) intent = Intent.WARNING
 
         return (
-            <Slider
-                disabled
-                stepSize={0.2}
-                labelStepSize={1}
-                min={0}
-                max={10}
-                value={risk * 10}
+            <ProgressBar
+                className='pt-no-stripes pt-no-animation'
+                value={risk}
+                intent={intent}
             />
         )
     }
