@@ -29,7 +29,7 @@ class FeedList extends React.Component {
                 </div>
                 <h4 className="pt-non-ideal-state-title">No {risk && 'risk '}feeds found</h4>
                 <div className="pt-non-ideal-state-description">
-                    Create a new file to populate the folder.
+                    Send us a video stream to record new feeds!
                 </div>
             </div>
         );
@@ -56,8 +56,8 @@ class FeedList extends React.Component {
                         }}
                     >
                         {risk ?
-                            <h2>Active Feeds</h2> :
-                            <h2>Feeds</h2>
+                            <h2>Feeds</h2> :
+                            <h2>Inactive Feeds</h2>
                         }
                     </div>
                     {!!feeds.length && <h4 style={{ position: 'absolute', right: '0.8em', bottom: 0}}>Risk</h4>}

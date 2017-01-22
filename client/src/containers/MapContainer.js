@@ -26,6 +26,16 @@ export default class MapContainer extends Component {
         axios.get(`${API_URL}/feeds`)
             .then((resp) => {
                 const { data } = resp.data;
+                data.forEach((feed) =>  {
+                    axios.put(`${API_URL}/feeds/ts/${feed.id}?new=true`, {})
+                        .catch(console.log)
+                })
+                this.interval = setInterval(() => {
+                    data.forEach((feed) =>  {
+                        axios.put(`${API_URL}/feeds/ts/${feed.id}`, {})
+                            .catch(console.log)
+                    })
+                }, 1000);
                 this.setState({
                     feeds: data,
                 });
@@ -39,6 +49,7 @@ export default class MapContainer extends Component {
         socket.removeListener(FEED_EVENTS.update);
         socket.removeListener(FEED_EVENTS.delete);
         socket.removeListener(FEED_EVENTS.insert);
+        clearInterval(this.interval);
     }
 
     handleDelete = (feed) => {

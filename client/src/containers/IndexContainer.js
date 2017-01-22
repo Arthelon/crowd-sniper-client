@@ -8,11 +8,12 @@ import * as _ from 'lodash';
 import update from 'immutability-helper';
 import { Spinner } from '@blueprintjs/core';
 
-const sortedInsert = (arr, feed) => _.reverse(_.sortBy(_.concat(arr, feed), (feed) => feed.risk));
+const sortedInsert = (arr, feed) => _.concat(arr, feed);
 
-const sortedInsertAndSplice = (arr, feed) => {
-    const newArr = arr.filter((f) => f.id !== feed.id);
-    return sortedInsert(newArr, feed)
+const replaceFeed = (arr, feed) => {
+    const index = _.findIndex(arr, (f) => f.id === feed.id)
+    arr.splice(index, 1, feed)
+    return arr;
 };
 
 
@@ -104,9 +105,8 @@ export default class IndexContainer extends Component {
                 }
             }));
         } else {
-            console.log(sortedInsertAndSplice(this.state[field], feed));
             this.setState({
-                [field]: sortedInsertAndSplice(this.state[field], feed)
+                [field]: replaceFeed(this.state[field], feed)
             });
         }
     };

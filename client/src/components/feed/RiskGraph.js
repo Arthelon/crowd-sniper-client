@@ -22,16 +22,16 @@ class RiskGraph extends React.Component {
         const { data } = this.state;
         return (
             <XYPlot
-                width={1000}
+                width={1100}
                 height={300}>
                 <HorizontalGridLines />
                 <LineSeries
                     color="green"
                     data={data}/>
-                <XAxis title="X" />
+                <XAxis title="Time (secs)" />
                 <YAxis
-                    tickTotal={10}
-                    tickSize={1}
+                    title="Risk"
+                    tickValues={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
                 />
             </XYPlot>
         );
